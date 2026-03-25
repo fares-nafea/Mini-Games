@@ -9,6 +9,9 @@
       }
     },
     "ServerScriptService": {
+      "GameHandler": {
+        "$path": "src/server/GameHandler.server.lua"
+      }
     },
     "StarterGui": {
       "StatusGui": {
