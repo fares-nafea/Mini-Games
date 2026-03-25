@@ -4,8 +4,22 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
+      "GameStatus": {
+        "$className": "StringValue"
+      }
     },
     "ServerScriptService": {
+    },
+    "StarterGui": {
+      "StatusGui": {
+        "$className": "ScreenGui",
+        "StatusLabel": {
+          "$className": "TextLabel"
+        },
+        "StatusUpdater": {
+          "$path": "src/client/StatusUpdater.client.lua"
+        }
+      }
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
