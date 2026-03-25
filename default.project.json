@@ -1,0 +1,21 @@
+{
+  "name": "Mini-Games",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+    },
+    "ServerScriptService": {
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+      }
+    },
+    "Workspace": {
+    },
+    "Lighting": {
+    },
+    "SoundService": {
+    }
+  }
+}
