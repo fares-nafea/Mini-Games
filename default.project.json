@@ -13,6 +13,17 @@
         "$path": "src/server/GameHandler.server.lua"
       }
     },
+    "ServerStorage": {
+      "TeleportPlayers": {
+        "$path": "src/server/TeleportPlayers.luau"
+      },
+      "MiniGames": {
+        "$className": "Folder",
+        "Lava Rising": {
+          "$path": "src/server/LavaRising.luau"
+        }
+      }
+    },
     "StarterGui": {
       "StatusGui": {
         "$className": "ScreenGui",
