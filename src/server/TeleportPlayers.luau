@@ -8,6 +8,11 @@ local function TeleportPlayers(teleCFrame, ToGame)
         if char and char:FindFirstChild("HumanoidRootPart") then
 
             if ToGame then
+
+                if plr:GetAttribute("AFK") then
+                    continue
+                end
+                
                 char.Parent = workspace.InGame
             else
                 char.Parent = workspace
