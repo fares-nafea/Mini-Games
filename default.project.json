@@ -6,11 +6,20 @@
     "ReplicatedStorage": {
       "GameStatus": {
         "$className": "StringValue"
+      },
+      "Events": {
+        "$className": "Folder",
+        "AfkMode": {
+          "$className": "RemoteEvent"
+        }
       }
     },
     "ServerScriptService": {
       "GameHandler": {
         "$path": "src/server/GameHandler.server.lua"
+      },
+      "AfkHandler": {
+        "$path": "src/server/AfkHandler.server.lua"
       }
     },
     "ServerStorage": {
@@ -32,6 +41,18 @@
         },
         "StatusUpdater": {
           "$path": "src/client/StatusUpdater.client.lua"
+        }
+      },
+      "AfkMode": {
+        "$className": "ScreenGui",
+        "AfkGui": {
+          "$path": "src/client/AfkGui.client.lua"
+        },
+        "AfkButton": {
+          "$className": "TextButton",
+          "AfkStatus": {
+            "$className": "TextLabel"
+          }
         }
       }
     },
