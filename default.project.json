@@ -29,7 +29,10 @@
       "MiniGames": {
         "$className": "Folder",
         "Lava Rising": {
-          "$path": "src/server/LavaRising.luau"
+          "$path": "src/server/LavaRising.luau",
+          "GameModel": {
+            "$className": "Folder"
+          }
         }
       }
     },
