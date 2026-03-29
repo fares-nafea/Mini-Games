@@ -20,6 +20,9 @@
       },
       "AfkHandler": {
         "$path": "src/server/AfkHandler.server.lua"
+      },
+      "Leaderstatus": {
+        "$path": "src/server/Leaderstatus.server.lua"
       }
     },
     "ServerStorage": {

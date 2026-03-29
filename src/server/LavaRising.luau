@@ -46,7 +46,10 @@ function MiniGame.RunGame()
     local winners = workspace.InGame:GetChildren()
     local endText = "The Winners are: "
 
-    for i, plr in ipairs(winners) do
+    for i, plrChar in ipairs(winners) do
+
+        local plr = game.Players:GetPlayerFromCharacter(plrChar)
+        plr.leaderstats.Wins.Value += 1
 
         endText = endText .. plr.Name .. " "
 
