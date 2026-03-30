@@ -1,7 +1,7 @@
 local MiniGame = {}
 local gameModel = script:WaitForChild("GameModel")
 
-local riseTime = 10
+local riseTime = 25
 local riseDelay = 3
 
 local TweenService = game:GetService("TweenService")

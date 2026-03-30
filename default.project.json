@@ -40,6 +40,24 @@
       }
     },
     "StarterGui": {
+      "Stats": {
+        "$className": "ScreenGui",
+        "StatusUpdater": {
+          "$path": "src/client/StatusUpdaterWins.client.lua"
+        },
+        "Wins": {
+          "$className": "Frame",
+          "WinsIcon": {
+            "$className": "ImageLabel",
+            "UIAspectRatioConstraint": {
+              "$className": "UIAspectRatioConstraint"
+            }
+          },
+          "WinsLabel": {
+            "$className": "TextLabel"
+          }
+        }
+      },
       "StatusGui": {
         "$className": "ScreenGui",
         "StatusLabel": {
