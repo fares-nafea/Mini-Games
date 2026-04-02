@@ -29,10 +29,16 @@
       "TeleportPlayers": {
         "$path": "src/server/TeleportPlayers.luau"
       },
+      "Lava Rising": {
+          "$path": "src/server/LavaRising.luau",
+          "GameModel": {
+            "$className": "Folder"
+          }
+        },
       "MiniGames": {
         "$className": "Folder",
-        "Lava Rising": {
-          "$path": "src/server/LavaRising.luau",
+        "Crazy Colors": {
+          "$path": "src/server/CrazyColors.luau",
           "GameModel": {
             "$className": "Folder"
           }
