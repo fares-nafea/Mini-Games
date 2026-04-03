@@ -10,6 +10,10 @@ _G.TeleportPlayers = TeleportPlayers
 local BasicEnding = require(game.ServerStorage:WaitForChild("BasicEnding"))
 _G.BasicEnding = BasicEnding
 
+local KillFunction = require(game.ServerStorage:WaitForChild("KillFunction"))
+_G.KillFunction = KillFunction
+
+
 local INTERMISSION = 10
 
 while true do

@@ -20,7 +20,7 @@ function MiniGame.RunGame()
     local newGame = gameModel:Clone()
     newGame.Parent = workspace
 
-    newGame.Lava.Touched:Connect(LavaTouched)
+    newGame.Lava.Touched:Connect(_G.KillFunction)
 
     local riseTween = TweenService:Create(
         newGame.Lava,
@@ -46,17 +46,6 @@ function MiniGame.RunGame()
     _G.BasicEnding()
 
     newGame:Destroy()
-end
-
-function LavaTouched(hit)
-
-    local humanoid = hit.Parent:FindFirstChild("Humanoid")
-    if humanoid then
-
-        humanoid.Health = 0
-
-    end
-
 end
 
 return MiniGame

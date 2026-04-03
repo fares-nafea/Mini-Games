@@ -19,7 +19,7 @@ function MiniGames.RunGame()
     local colors = newGame.Colors:GetChildren()
     newGame.Parent = workspace
 
-    newGame.Lava.Touched:Connect(LavaTouched)
+    newGame.Lava.Touched:Connect(_G.KillFunction)
 
     local closeTween = TweenService:Create(
         dividerBase,
@@ -70,17 +70,6 @@ function MiniGames.RunGame()
     _G.BasicEnding()
 
     newGame:Destroy()
-end
-
-function LavaTouched(hit)
-
-    local humanoid = hit.Parent:FindFirstChild("Humanoid")
-    if humanoid then
-
-        humanoid.Health = 0
-
-    end
-
 end
 
 

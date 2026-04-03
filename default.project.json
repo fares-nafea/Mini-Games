@@ -26,6 +26,9 @@
       }
     },
     "ServerStorage": {
+      "KillFunction": {
+        "$path": "src/server/KillFunction.luau"
+      },
       "BasicEnding": {
         "$path": "src/server/BasicEnding.luau"
       },
