@@ -46,6 +46,9 @@ function MiniGames.RunGame()
         _G.gameStatus.Value = "Round " .. round .. "; Pick a color (" .. countDown .. ")"
         task.wait(1)
     end
+    
+    closeTween:Play()
+    task.wait(1.2)
 
     -- Eliminate color
     local chosenColor = colors[math.random(1, #colors)]
@@ -53,6 +56,7 @@ function MiniGames.RunGame()
 
     chosenColor.CanCollide = false
     chosenColor.Transparency = 1
+     
     task.wait(3)
 
     chosenColor.CanCollide = true
