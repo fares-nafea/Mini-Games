@@ -29,6 +29,12 @@
       }
     },
     "ServerStorage": {
+      "Items": {
+        "$className": "Folder"
+      },
+      "Powers": {
+        "$path": "src/server/Powers.luau"
+      },
       "KillFunction": {
         "$path": "src/server/KillFunction.luau"
       },
