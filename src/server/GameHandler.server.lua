@@ -7,6 +7,9 @@ local lobbyCFrame = workspace:WaitForChild("Lobby"):WaitForChild("SpawnLocation"
 local TeleportPlayers = require(game.ServerStorage:WaitForChild("TeleportPlayers"))
 _G.TeleportPlayers = TeleportPlayers
 
+local BasicEnding = require(game.ServerStorage:WaitForChild("BasicEnding"))
+_G.BasicEnding = BasicEnding
+
 local INTERMISSION = 10
 
 while true do

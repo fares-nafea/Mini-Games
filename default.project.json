@@ -26,6 +26,9 @@
       }
     },
     "ServerStorage": {
+      "BasicEnding": {
+        "$path": "src/server/BasicEnding.luau"
+      },
       "TeleportPlayers": {
         "$path": "src/server/TeleportPlayers.luau"
       },

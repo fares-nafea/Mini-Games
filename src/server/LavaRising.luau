@@ -43,20 +43,7 @@ function MiniGame.RunGame()
     end
 
     -- End game
-    local winners = workspace.InGame:GetChildren()
-    local endText = "The Winners are: "
-
-    for i, plrChar in ipairs(winners) do
-
-        local plr = game.Players:GetPlayerFromCharacter(plrChar)
-        plr.leaderstats.Wins.Value += 1
-
-        endText = endText .. plr.Name .. " "
-
-    end
-
-    _G.gameStatus.Value = endText
-    task.wait(3)
+    _G.BasicEnding()
 
     newGame:Destroy()
 end

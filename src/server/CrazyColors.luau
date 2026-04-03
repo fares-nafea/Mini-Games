@@ -14,7 +14,70 @@ local choosingTime = 5
 function MiniGames.RunGame()
 
     -- Set game
-    local newGame
+    local newGame = gamemodel:Clone()
+    local dividerBase = newGame.Divider.Base
+    local colors = newGame.Colors:GetChildren()
+    newGame.Parent = workspace
+
+    newGame.Lava.Touched:Connect(LavaTouched)
+
+    local closeTween = TweenService:Create(
+        dividerBase,
+        dividerTweenInfo,
+        {CFrame = dividerBase.CFrame}
+    )
+
+    local openTween = TweenService:Create(
+        dividerBase,
+        dividerTweenInfo,
+        {CFrame = dividerBase.CFrame + Vector3.yAxis*25}
+    )
+
+    _G.TeleportPlayers(newGame.Colors.Red.CFrame + Vector3.yAxis*5, true)
+    _G.gameStatus.Value = "Avoid the chosen color!"
+
+    task.wait(2)
+    openTween:Play()
+
+    -- Start game
+    for round = 1, totalRounds do
+      --choosing time
+     for countDown = choosingTime,0,-1 do
+        _G.gameStatus.Value = "Round " .. round .. "; Pick a color (" .. countDown .. ")"
+        task.wait(1)
+    end
+
+    -- Eliminate color
+    local chosenColor = colors[math.random(1, #colors)]
+    dividerBase.Color = chosenColor.Color
+
+    chosenColor.CanCollide = false
+    chosenColor.Transparency = 1
+    task.wait(3)
+
+    chosenColor.CanCollide = true
+    chosenColor.Transparency = 0
+
+    openTween:Play()
+
+    end
+
+    -- End game
+    _G.BasicEnding()
+
+    newGame:Destroy()
 end
+
+function LavaTouched(hit)
+
+    local humanoid = hit.Parent:FindFirstChild("Humanoid")
+    if humanoid then
+
+        humanoid.Health = 0
+
+    end
+
+end
+
 
 return MiniGames
