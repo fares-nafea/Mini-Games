@@ -11,6 +11,9 @@
         "$className": "Folder",
         "AfkMode": {
           "$className": "RemoteEvent"
+        },
+        "ItemPurchased": {
+          "$className": "RemoteFunction"
         }
       }
     },
@@ -35,12 +38,6 @@
       "TeleportPlayers": {
         "$path": "src/server/TeleportPlayers.luau"
       },
-      "Lava Rising": {
-          "$path": "src/server/LavaRising.luau",
-          "GameModel": {
-            "$className": "Folder"
-          }
-        },
       "MiniGames": {
         "$className": "Folder",
         "Lava Rising": {
@@ -58,6 +55,12 @@
       }
     },
     "StarterGui": {
+      "ShopGui": {
+        "$className": "ScreenGui",
+        "ShopGui": {
+          "$path": "src/client/ShopGui.client.lua"
+        }
+      },
       "Stats": {
         "$className": "ScreenGui",
         "StatusUpdater": {
