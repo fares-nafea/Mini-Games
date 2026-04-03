@@ -40,6 +40,12 @@
         },
       "MiniGames": {
         "$className": "Folder",
+        "Lava Rising": {
+          "$path": "src/server/LavaRising.luau",
+          "GameModel": {
+            "$className": "Folder"
+          }
+        },
         "Crazy Colors": {
           "$path": "src/server/CrazyColors.luau",
           "GameModel": {
