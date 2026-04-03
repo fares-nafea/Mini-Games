@@ -9,6 +9,9 @@
       },
       "Events": {
         "$className": "Folder",
+        "LowGravity": {
+          "$className": "RemoteEvent"
+        },
         "AfkMode": {
           "$className": "RemoteEvent"
         },
@@ -33,7 +36,13 @@
         "$className": "Folder"
       },
       "Powers": {
-        "$path": "src/server/Powers.luau"
+        "$path": "src/server/Powers.luau",
+        "LowGravity": {
+          "$className": "ParticleEmitter"
+        },
+        "ExtraSpeed": {
+          "$className": "ParticleEmitter"
+        }
       },
       "KillFunction": {
         "$path": "src/server/KillFunction.luau"
