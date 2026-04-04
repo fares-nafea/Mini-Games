@@ -36,7 +36,13 @@
     },
     "ServerStorage": {
       "Items": {
-        "$className": "Folder"
+        "$className": "Folder",
+        "FIRE": {
+          "$className": "ParticleEmitter"
+        },
+        "ICE": {
+          "$className": "ParticleEmitter"
+        }
       },
       "Powers": {
         "$path": "src/server/Powers.luau",
@@ -121,6 +127,9 @@
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
+        "LowGravity": {
+          "$path": "src/client/LowGravity.client.lua"
+        }
       }
     },
     "Workspace": {
