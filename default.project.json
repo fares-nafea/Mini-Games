@@ -21,6 +21,9 @@
       }
     },
     "ServerScriptService": {
+      "ShopHandler": {
+        "$path": "src/server/ShopHandler.server.lua"
+      },
       "GameHandler": {
         "$path": "src/server/GameHandler.server.lua"
       },
