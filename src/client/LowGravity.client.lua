@@ -3,8 +3,12 @@ local gravityMod = 175
 
 LowGravityEvent.OnClientEvent:Connect(function(powerTime)
 
-    workspace.Gravity -= gravityMod
+    local originalGravity = workspace.Gravity
+
+    workspace.Gravity = originalGravity - gravityMod
+
     task.wait(powerTime)
-    workspace.Gravity += gravityMod
+
+    workspace.Gravity = originalGravity
     
 end)

@@ -9,12 +9,12 @@ local ItemPurchased = game.ReplicatedStorage:WaitForChild("Events"):WaitForChild
 for i, frame in ipairs(ItemFrames) do
 
     if not frame:IsA("TextButton") then continue end
-    frame.PriceLabel.Text = frame:GetAttribute("Price")
+    
+    frame.PriceLabel.Text = tostring(frame:GetAttribute("Price"))
 
     frame.Activated:Connect(function()
 
         local purchaseSuccess = ItemPurchased:InvokeServer(frame)
-
         print(purchaseSuccess)
 
     end)
@@ -23,6 +23,7 @@ end
 local defaultSize = MainFrame.Size
 local animTime = .25
 local animSize = .3
+
 ShopButton.Activated:Connect(function()
 
     if MainFrame.Visible then
@@ -41,6 +42,7 @@ ShopButton.Activated:Connect(function()
     else
 
         MainFrame.Size = defaultSize - UDim2.fromScale(animSize, animSize)
+        MainFrame.Visible = true
 
         MainFrame:TweenSize(
             defaultSize,
@@ -49,8 +51,6 @@ ShopButton.Activated:Connect(function()
             animTime,
             true
         )
-
-        MainFrame.Visible = true
 
     end
     

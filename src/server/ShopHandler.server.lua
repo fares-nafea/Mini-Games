@@ -11,13 +11,11 @@ ItemPurchased.OnServerInvoke = function(player, frame)
     local itemInfo = frame:GetAttributes()
     local playerWins = player.leaderstats.Wins.Value
 
-    -- print(player,"is purchasing an",itemInfo["Type"],"that is called", itemInfo["Name"],"and is",itemInfo["Price"],"wins")
-
     if playerWins < itemInfo["Price"] then return end
 
     if itemInfo["Type"] == "Aura" then
 
-        if ItemPurchased(player, playerCharacter, itemInfo, playerWins) == false then
+        if HandleItemPurchase(player, playerCharacter, itemInfo, playerWins) == false then
             return
         end
 
@@ -41,16 +39,17 @@ end
 
 
 
-function ItemPurchased(player, playerCharacter, itemInfo, playerWins)
+function HandleItemPurchase(player, playerCharacter, itemInfo, playerWins)
 
     local chosenItem = Items:FindFirstChild(itemInfo["Name"])
     if not chosenItem then warn(itemInfo["Name"],"does not exist") return end
 
-    -- Equip
     if player.CurrentItem.Value then
-        player.CurrentItem.Value:Destroy()
+        local oldItem = player.CurrentItem.Value
+        player.CurrentItem.Value = nil
+        oldItem:Destroy()
 
-        if player.CurrentItem.Value.Name == itemInfo["Name"] then
+        if oldItem.Name == itemInfo["Name"] then
             return false
         end
     end
@@ -58,7 +57,10 @@ function ItemPurchased(player, playerCharacter, itemInfo, playerWins)
     local equippedItem = chosenItem:Clone()
     player.CurrentItem.Value = equippedItem
 
-    equippedItem.Parent = playerCharacter.HumanoidRootPart
+    local root = playerCharacter:FindFirstChild("HumanoidRootPart")
+    if root then
+        equippedItem.Parent = root
+    end
 
     if not player.Items:FindFirstChild(itemInfo["Name"]) then
         local newItemValue = Instance.new("StringValue", player.Items)
@@ -68,17 +70,16 @@ function ItemPurchased(player, playerCharacter, itemInfo, playerWins)
     end
 
     return false
-
 end
 
 
 function PowerPurchased(player, playerCharacter, itemInfo, playerWins)
 
+    local powerFunction = Powers[itemInfo["Name"]]
+    if not powerFunction then return end
 
     local success, powerError = pcall(function()
-
-        Powers[itemInfo["Name"]](player, playerCharacter)
-
+        powerFunction(player, playerCharacter)
     end)
 
     if not success then

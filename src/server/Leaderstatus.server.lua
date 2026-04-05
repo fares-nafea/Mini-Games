@@ -1,8 +1,8 @@
 local Players = game:GetService("Players")
 
 local DataStoreService = game:GetService("DataStoreService")
-local WinsDataStore = DataStoreService:GetOrderedDataStore("WinsData-1")
-local ItemDataStore = DataStoreService:GetDataStore("Items-1")
+local WinsDataStore = DataStoreService:GetOrderedDataStore("WinsData-2")
+local ItemDataStore = DataStoreService:GetDataStore("Items-2")
 
 Players.PlayerAdded:Connect(function(player)
 
