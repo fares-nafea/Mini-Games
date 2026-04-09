@@ -13,10 +13,20 @@ _G.BasicEnding = BasicEnding
 local KillFunction = require(game.ServerStorage:WaitForChild("KillFunction"))
 _G.KillFunction = KillFunction
 
-
 local INTERMISSION = 10
+local MIN_PLAYERS = 1
+
+_G.GameQueue = {}
 
 while true do
+
+    -- Player requirement
+    if #game.Players:GetPlayers() < MIN_PLAYERS then
+        gameStatus.Value = MIN_PLAYERS .. "players needed to start"
+        repeat
+            task.wait(1)
+        until #game.Players:GetPlayers() >= MIN_PLAYERS
+    end
  
     -- Intermission
     for countDown = INTERMISSION, 0, -1 do

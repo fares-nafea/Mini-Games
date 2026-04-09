@@ -77,7 +77,19 @@
           }
         },
         "Tile Dash": {
-        "$path": "src/server/Tile Dash.luau"
+          "$path": "src/server/Tile Dash.luau",
+          "GameModel": {
+            "$className": "Folder",
+            "Lava": {
+              "$className": "Part"
+            },
+            "Spawn": {
+              "$className": "Part"
+            },
+            "Tiles": {
+              "$className": "Folder"
+            }
+          }
         }
       }
     },
@@ -136,18 +148,6 @@
       }
     },
     "Workspace": {
-      "GameModel": {
-        "$className": "Folder",
-        "Lava": {
-          "$className": "Part"
-        },
-        "Spawn": {
-          "$className": "Part"
-        },
-        "Tiles": {
-          "$className": "Folder"
-        }
-      }
     },
     "Lighting": {
     },
