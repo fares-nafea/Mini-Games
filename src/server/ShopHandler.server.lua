@@ -38,9 +38,7 @@ ItemPurchased.OnServerInvoke = function(player, frame)
     else
         return
     end
-
-    player.leaderstats.Wins.Value -= itemInfo["Price"]
-
+    
     return "Successful"
 end
 
