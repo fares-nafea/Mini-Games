@@ -8,7 +8,7 @@ local dividerTweenInfo = TweenInfo.new(
     Enum.EasingDirection.InOut
 )
 
-local totalRounds = 2
+local totalRounds = 5
 local choosingTime = 5
 
 function MiniGames.RunGame()
