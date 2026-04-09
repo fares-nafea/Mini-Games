@@ -4,10 +4,10 @@ local gameModel = script:WaitForChild("GameModel")
 local TweenService = game:GetService("TweenService")
 
 local gameTime = 35
-local startingDropTime = .75
-local dropTimeDecrease = .8
-local tileBlinkCount = 3
-local tilesToFall = 6
+local startingDropTime = .5
+local dropTimeDecrease = .4
+local tileBlinkCount = 2
+local tilesToFall = 20
 local tileWarningColor = Color3.fromRGB(255, 73, 49)
 
 local tileTweenInfo = TweenInfo.new(
