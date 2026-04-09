@@ -35,7 +35,6 @@ ItemPurchased.OnServerInvoke = function(player, frame)
         player.CurrentPower.Value = true
         PowerPurchased(player, playerCharacter, itemInfo, playerWins)
 
-
     else
         return
     end
