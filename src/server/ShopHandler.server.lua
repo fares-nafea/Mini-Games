@@ -41,7 +41,7 @@ end
 
 
 
-function ItemPurchase(player, playerCharacter, itemInfo, playerWins)
+function ItemPurchased(player, playerCharacter, itemInfo, playerWins)
 
     local chosenItem = Items:FindFirstChild(itemInfo["Name"])
     if not chosenItem then warn(itemInfo["Name"], "does not exist") return end
@@ -63,24 +63,24 @@ function ItemPurchase(player, playerCharacter, itemInfo, playerWins)
     if not player.Items:FindFirstChild(itemInfo["Name"]) then
         local newItemValue = Instance.new("StringValue", player.Items)
         newItemValue.Name = itemInfo["Name"]
-        newItemValue.Parent = player.Items
+
+        return true
     end
 
-    return true
+    return false
+
 end
 
+
 function PowerPurchased(player, playerCharacter, itemInfo, playerWins)
-    local powerFunction = Powers[itemInfo["Name"]]
-    if not powerFunction then return false end
 
     local success, powerError = pcall(function()
-        powerFunction(player, playerCharacter)
+
+        Powers[itemInfo["Name"]](player, playerCharacter)
+
     end)
 
     if not success then
         warn(player, powerError)
-        return false
     end
-
-    return true
 end
