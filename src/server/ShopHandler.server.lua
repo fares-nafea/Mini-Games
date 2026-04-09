@@ -17,6 +17,8 @@ ItemPurchased.OnServerInvoke = function(player, frame)
 
     if itemInfo["Type"] == "Aura" then
 
+        player.leaderstats.Wins.Value -= itemInfo["Price"]
+
         if ItemPurchased(player, playerCharacter, itemInfo, playerWins) == false then
             return
         end
@@ -25,10 +27,14 @@ ItemPurchased.OnServerInvoke = function(player, frame)
             return
         end
 
+
     elseif itemInfo["Type"] == "Power" and player.CurrentPower.Value == false then
+
+        player.leaderstats.Wins.Value -= itemInfo["Price"]
 
         player.CurrentPower.Value = true
         PowerPurchased(player, playerCharacter, itemInfo, playerWins)
+
 
     else
         return
