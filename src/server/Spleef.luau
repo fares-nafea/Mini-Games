@@ -56,7 +56,7 @@ function Spleef.RunGame()
     end
 
     _G.BasicEnding()
-    
+    gameModel:Destroy()
 end
 
 
