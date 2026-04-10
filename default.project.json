@@ -90,6 +90,24 @@
               "$className": "Folder"
             }
           }
+        },
+        "Spleef": {
+          "$path": "src/server/Spleef.luau",
+          "GameModel": {
+            "$className": "Folder",
+            "Levels": {
+              "$className": "Folder",
+              "Level": {
+                "$className": "Model"
+              }
+            },
+            "KillBrick": {
+              "$className": "Part"
+            },
+            "SpawnPoint": {
+              "$className": "Part"
+            }
+          }
         }
       }
     },
