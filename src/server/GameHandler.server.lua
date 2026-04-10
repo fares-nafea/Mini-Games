@@ -13,8 +13,12 @@ _G.BasicEnding = BasicEnding
 local KillFunction = require(game.ServerStorage:WaitForChild("KillFunction"))
 _G.KillFunction = KillFunction
 
+local VotingEvent = game.ReplicatedStorage.Events:WaitForChild("Voting")
+local UpdateVotes = game.ReplicatedStorage.Events:WaitForChild("UpdateVotes")
+
 local INTERMISSION = 10
 local MIN_PLAYERS = 1
+local VOTE_TIME = 8
 
 _G.GameQueue = {}
 
@@ -36,11 +40,32 @@ while true do
 
     end
 
-    -- Choose mini game
-    gameStatus.Value = "Choosing game..."
-    task.wait(2)
+    local chosenGameModule = nil
 
-    local chosenGameModule = miniGames[math.random(#miniGames)]
+    -- dev product
+    if # _G.GameQueue ~= 0 then
+        chosenGameModule = _G.GameQueue[1]
+        table.remove(_G.GameQueue, 1)
+
+    else --> Voting
+
+        local gameVotes = {}
+        local plrVotes = {}
+        local selectedGames = {}
+        local games = game.ServerStorage.MiniGames:GetChildren()
+
+        for i = 1, 3 do
+
+            local chosenGame = games[math.random(#game)]
+            table.remove(games, table.find(game, chosenGame))
+            table.insert(selectedGames, {
+                Name = chosenGame.Name,
+                Img = chosenGame:GetAttribute("Img")
+            })
+
+            gameVotes[chosenGame.Name] = 0
+        end
+    end
 
     gameStatus.Value = chosenGameModule.Name .. " has been chosen!"
     task.wait(2)

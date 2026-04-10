@@ -17,6 +17,15 @@
         },
         "ItemPurchased": {
           "$className": "RemoteFunction"
+        },
+        "UpdateVotes": {
+          "$className": "RemoteFunction"
+        },
+        "Voting": {
+          "$className": "RemoteEvent"
+        },
+        "MinigameChosen": {
+          "$className": "RemoteEvent"
         }
       }
     },
@@ -112,6 +121,24 @@
       }
     },
     "StarterGui": {
+      "VotingFrame": {
+        "$className": "ScreenGui",
+        "MainFrame": {
+          "$className": "Frame",
+          "VotingClient": {
+            "$className": "Folder",
+            "Selected": {
+              "$className": "Frame"
+            }
+          },
+          "Columns": {
+            "$className": "Frame",
+            "ImageButton": {
+              "$className": "ImageButton"
+            }
+          }
+        }
+      },
       "ShopGui": {
         "$className": "ScreenGui",
         "ShopGui": {
