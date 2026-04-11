@@ -65,7 +65,56 @@ while true do
 
             gameVotes[chosenGame.Name] = 0
         end
+
+        VotingEvent:FireAllClients(selectedGames)
+
+        UpdateVotes.OnServerInvoke = function(player, vote)
+            if vote then
+
+                local gameModule = game.ServerStorage.MiniGames:FindFirstChild(vote)
+                if not gameModule or not gameVotes[gameModule.Name] then
+                    warn(tostring(vote) .. " is not a votable minigame")
+                    return gameVotes
+                end
+
+                local playerVote = plrVotes[player.UserId]
+                if playerVote then
+                    gameVotes[playerVote] -= 1
+                end
+                plrVotes[player.UserId] = vote
+
+                gameVotes[vote] += 1
+
+            end
+
+            return gameVotes
+        end
+
+        -- Let players vote
+        for countDown = VOTE_TIME, 0, -1 do
+
+            gameStatus.Value = "Vote ( " .. countDown .. " )"
+            task.wait(1)
+
+        end
+
+        -- End of Voting
+        VotingEvent:FireAllClients(nil)
+        UpdateVotes.OnServerInvoke = nil
+
+        -- choose heighest voted game
+        local heighestVotes = 0
+        for name, votes in ipairs(gameVotes) do
+            if votes >= heighestVotes then
+                
+                chosenGameModule = game.ServerStorage.MiniGames[name]
+                heighestVotes = votes
+                
+            end
+        end
     end
+
+
 
     gameStatus.Value = chosenGameModule.Name .. " has been chosen!"
     task.wait(2)
