@@ -126,7 +126,7 @@
         "MainFrame": {
           "$className": "Frame",
           "VotingClient": {
-            "$className": "Folder",
+            "$path": "src/client/VotingClient.client.lua",
             "Selected": {
               "$className": "Frame"
             }

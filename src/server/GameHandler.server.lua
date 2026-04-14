@@ -56,8 +56,8 @@ while true do
 
         for i = 1, 3 do
 
-            local chosenGame = games[math.random(#game)]
-            table.remove(games, table.find(game, chosenGame))
+            local chosenGame = games[math.random(#games)]
+            table.remove(games, table.find(games, chosenGame))
             table.insert(selectedGames, {
                 Name = chosenGame.Name,
                 Img = chosenGame:GetAttribute("Img")
@@ -104,10 +104,10 @@ while true do
 
         -- choose heighest voted game
         local heighestVotes = 0
-        for name, votes in ipairs(gameVotes) do
+        for name, votes in pairs(gameVotes) do
             if votes >= heighestVotes then
                 
-                chosenGameModule = game.ServerStorage.MiniGames[name]
+                chosenGameModule = game.ServerStorage.MiniGames:FindFirstChild(name)
                 heighestVotes = votes
                 
             end
