@@ -1,6 +1,11 @@
 local Spleef = {}
+local gameModel = script.GameModel
+local tileSize = gameModel:FindFirstChild("Tile", true).Size
 
+local RUNNING = false
 local roundTime = 60
+
+local minusHeight = .4
 
 local TweenService = game:GetService("TweenService")
 tileAnimationInfo = TweenInfo.new(
@@ -11,53 +16,96 @@ tileAnimationInfo = TweenInfo.new(
     true
 )
 
+gameModel.KillBrick.Touched:Connect(_G.KillFunction)
+
+local hitTiles = {}
+
+for i, tile in ipairs(gameModel.Levels:GetDescendants()) do
+    if tile.ClassName ~= "Part" then continue end
+
+    tile.Touched:Connect(function(hit)
+
+        if not hit.Parent:FindFirstChild("Humanoid") then return end
+        if not RUNNING then return end
+        if table.find(hitTiles, tile) then return end
+        table.insert(hitTiles, tile)
+
+        local Anim = TweenService:Create(
+            tile,
+            tileAnimationInfo,
+            {CFrame = tile.CFrame - Vector3.yAxis*.5, Size = tile.Size - Vector3.one*.2}
+        )
+
+        Anim:Play()
+        Anim:GetPropertyChangedSignal("PlaybackState"):Wait()
+
+        tile.Transparency = 1
+        tile.CanCollide = false
+
+    end)
+
+end
+
 function Spleef.RunGame()
 
-    local gameModel = script.GameModel:Clone()
+    local spawnPoint = gameModel.Spawn
+    spawnPoint.Parent = workspace
+    task.wait()
+
     gameModel.Parent = workspace
 
-    for i, tile in ipairs(gameModel.Levels:GetDescendants()) do
-        if tile.ClassName ~= "Part" then continue end
 
-        tile.Touched:Connect(function(hit)
-            if tile:GetAttribute("Tweening") then return end
-            if not hit.Parent:FindFirstChild("Humanoid") then return end
-            tile:SetAttribute("Tweening", true)
+    _G.TeleportPlayers(spawnPoint.CFrame + Vector3.yAxis* 10, true)
 
-            local Anim = TweenService:Create(
-                tile,
-                tileAnimationInfo,
-                {CFrame = tile.CFrame - Vector3.yAxis*.5, Size = tile.Size - Vector3.one*.2}
-            )
-
-            Anim:Play()
-            Anim:GetPropertyChangedSignal("PlaybackState"):Wait()
-
-            tile:Destroy()
-
-        end)
-
+    local players = workspace.InGame:GetChildren()
+    for i, char in ipairs(players) do
+        char.Humanoid.HipHeight -= minusHeight
     end
-
-    gameModel.KillBrick.Touched:Connect(_G.KillFunction)
-
-    _G.TeleportPlayers(gameModel.SpawnPoint.CFrame + Vector3.yAxis* 10, true)
 
     for countDown = 10, 1, -1 do
         task.wait(1)
         _G.gameStatus.Value = "Game starting in " .. countDown
     end
 
-    gameModel.SpawnPoint:Destroy()
+    RUNNING = true
+
+    local spawnTransparency = spawnPoint.Transparency
+    spawnPoint.Transparency = 1
+    spawnPoint.CanCollide = false
+    spawnPoint.Parent = gameModel
+
     _G.gameStatus.Value = "Last one alive wins!"
 
     while #workspace.InGame:GetChildren() > 1 do
         workspace.InGame.ChildRemoved:Wait()
     end
 
+    RUNNING = false
     _G.BasicEnding()
-    gameModel:Destroy()
-end
 
+    for i, char in ipairs(players) do
+        if char then
+            char.Humanoid.HipHeight += minusHeight
+        end
+    end
+
+    gameModel.Parent = script
+
+    coroutine.wrap(function()
+        for i, tile in ipairs(hitTiles) do
+            
+            tile.Size = tileSize
+            tile.Transparency = 0
+            tile.CanCollide = true
+
+        end
+    end)()
+
+    table.clear(hitTiles)
+
+    spawnPoint.Transparency = spawnTransparency
+    spawnPoint.CanCollide = true
+
+end
 
 return Spleef
