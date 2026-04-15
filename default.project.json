@@ -73,6 +73,63 @@
       },
       "MiniGames": {
         "$className": "Folder",
+        "Capture The Flag": {
+          "$path": "src/server/Capture The Flag.luau",
+          "GameModel": {
+            "$className": "Folder",
+            "Flags": {
+              "$className": "Folder"
+            },
+            "Markers": {
+              "$className": "Folder"
+            },
+            "Rocks": {
+              "$className": "Model"
+            },
+            "Walls": {
+              "$className": "Model"
+            },
+            "Base": {
+              "$className": "Part"
+            },
+            "BlueSpawn": {
+              "$className": "Part"
+            },
+            "RedSpawn": {
+              "$className": "Part"
+            }
+          },
+          "ClassicSword": {
+            "$className": "Tool",
+            "SwordScript": {
+              "$path": "src/server/SwordScript.server.lua"
+            },
+            "MouseIcon": {
+              "$path": "src/client/MouseIcon.client.lua"
+            },
+            "Handle": {
+              "$className": "Part",
+              "SwordLunge": {
+                "$className": "Sound"
+              },
+              "SwordSlash": {
+                "$className": "Sound"
+              },
+              "Unsheath": {
+                "$className": "Sound"
+              },
+              "Mesh": {
+                "$className": "SpecialMesh"
+              }
+            }
+          },
+          "FlaggedMarker": {
+            "$className": "BillboardGui",
+            "MainFrame": {
+              "$className": "Frame"
+            }
+          }
+        },
         "Lava Rising": {
           "$path": "src/server/LavaRising.luau",
           "GameModel": {
