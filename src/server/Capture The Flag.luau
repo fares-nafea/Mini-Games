@@ -113,11 +113,11 @@ function MiniGame.RunGame()
                     redCarrier = hit.Parent
                 else -- Blue Stolen
                     newMarker.MainFrame.BackgroundColor3 = blueColor
-                    redCarrier = hit.Parent
+                    blueCarrier = hit.Parent
                 end
 
                 -- Carrier dies
-                deathConns[#deathConns + 1] = hit.Parent.HumanoidRootPart.Died:Once(function()
+                deathConns[#deathConns + 1] = hit.Parent.Humanoid.Died:Once(function()
                     flag.Parent = newGame.Flags
 
                     newMarker:Destroy()
@@ -175,7 +175,7 @@ function MiniGame.RunGame()
     end
 
     -- Destroy Swords
-    for i, sword in ipairs(swords) do
+    for _, sword in pairs(swords) do
         sword:Destroy()
     end
 
@@ -185,7 +185,7 @@ function MiniGame.RunGame()
     else
         _G.gameStatus.Value = "Team " ..winner.. " Has won!"
 
-        if winner == "blue" then
+        if winner == "Blue" then
             winner = blueTeam
         else
             winner = redTeam
