@@ -63,6 +63,7 @@ while true do
                 Img = chosenGame:GetAttribute("Img")
             })
 
+            print(#games)
             gameVotes[chosenGame.Name] = 0
         end
 
