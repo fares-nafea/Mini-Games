@@ -9,202 +9,235 @@
       },
       "Events": {
         "$className": "Folder",
-        "LowGravity": {
-          "$className": "RemoteEvent"
-        },
-        "AfkMode": {
-          "$className": "RemoteEvent"
-        },
-        "ItemPurchased": {
-          "$className": "RemoteFunction"
-        },
-        "UpdateVotes": {
-          "$className": "RemoteFunction"
-        },
-        "Voting": {
-          "$className": "RemoteEvent"
-        },
-        "MinigameChosen": {
-          "$className": "RemoteEvent"
-        }
+        "LowGravity": { "$className": "RemoteEvent" },
+        "AfkMode": { "$className": "RemoteEvent" },
+        "ItemPurchased": { "$className": "RemoteFunction" },
+        "UpdateVotes": { "$className": "RemoteFunction" },
+        "Voting": { "$className": "RemoteEvent" },
+        "MinigameChosen": { "$className": "RemoteEvent" }
       }
     },
+
     "ServerScriptService": {
-      "ShopHandler": {
-        "$path": "src/server/ShopHandler.server.lua"
-      },
-      "GameHandler": {
-        "$path": "src/server/GameHandler.server.lua"
-      },
-      "AfkHandler": {
-        "$path": "src/server/AfkHandler.server.lua"
-      },
-      "leaderstats": {
-        "$path": "src/server/Leaderstatus.server.lua"
-      }
+      "ShopHandler": { "$path": "src/server/ShopHandler.server.lua" },
+      "GameHandler": { "$path": "src/server/GameHandler.server.lua" },
+      "AfkHandler": { "$path": "src/server/AfkHandler.server.lua" },
+      "leaderstats": { "$path": "src/server/Leaderstatus.server.lua" }
     },
+
     "ServerStorage": {
       "Items": {
         "$className": "Folder",
-        "FIRE": {
-          "$className": "ParticleEmitter"
-        },
-        "ICE": {
-          "$className": "ParticleEmitter"
-        }
+        "FIRE": { "$className": "ParticleEmitter" },
+        "ICE": { "$className": "ParticleEmitter" }
       },
+
       "Powers": {
         "$path": "src/server/Powers.luau",
-        "LowGravity": {
-          "$className": "ParticleEmitter"
-        },
-        "ExtraSpeed": {
-          "$className": "ParticleEmitter"
-        }
+        "LowGravity": { "$className": "ParticleEmitter" },
+        "ExtraSpeed": { "$className": "ParticleEmitter" }
       },
-      "KillFunction": {
-        "$path": "src/server/KillFunction.luau"
-      },
-      "BasicEnding": {
-        "$path": "src/server/BasicEnding.luau"
-      },
-      "TeleportPlayers": {
-        "$path": "src/server/TeleportPlayers.luau"
-      },
+
+      "KillFunction": { "$path": "src/server/KillFunction.luau" },
+      "BasicEnding": { "$path": "src/server/BasicEnding.luau" },
+      "TeleportPlayers": { "$path": "src/server/TeleportPlayers.luau" },
+
       "MiniGames": {
         "$className": "Folder",
+
         "Capture The Flag": {
           "$path": "src/server/Capture The Flag.luau",
           "GameModel": {
             "$className": "Folder",
-            "Flags": {
-              "$className": "Folder"
-            },
-            "Markers": {
-              "$className": "Folder"
-            },
-            "Rocks": {
-              "$className": "Model"
-            },
-            "Walls": {
-              "$className": "Model"
-            },
-            "Base": {
-              "$className": "Part"
-            },
-            "BlueSpawn": {
-              "$className": "Part"
-            },
-            "RedSpawn": {
-              "$className": "Part"
-            }
+            "Flags": { "$className": "Folder" },
+            "Markers": { "$className": "Folder" },
+            "Rocks": { "$className": "Model" },
+            "Walls": { "$className": "Model" },
+            "Base": { "$className": "Part" },
+            "BlueSpawn": { "$className": "Part" },
+            "RedSpawn": { "$className": "Part" }
           },
           "ClassicSword": {
             "$className": "Tool",
-            "SwordScript": {
-              "$path": "src/server/SwordScript.server.lua"
-            },
-            "MouseIcon": {
-              "$path": "src/client/MouseIcon.client.lua"
-            },
+            "SwordScript": { "$path": "src/server/SwordScript.server.lua" },
+            "MouseIcon": { "$path": "src/client/MouseIcon.client.lua" },
             "Handle": {
               "$className": "Part",
-              "SwordLunge": {
-                "$className": "Sound"
-              },
-              "SwordSlash": {
-                "$className": "Sound"
-              },
-              "Unsheath": {
-                "$className": "Sound"
-              },
-              "Mesh": {
-                "$className": "SpecialMesh"
-              }
+              "SwordLunge": { "$className": "Sound" },
+              "SwordSlash": { "$className": "Sound" },
+              "Unsheath": { "$className": "Sound" },
+              "Mesh": { "$className": "SpecialMesh" }
             }
           },
           "FlaggedMarker": {
             "$className": "BillboardGui",
-            "MainFrame": {
-              "$className": "Frame"
-            }
+            "MainFrame": { "$className": "Frame" }
           }
         },
+
         "Lava Rising": {
           "$path": "src/server/LavaRising.luau",
-          "GameModel": {
-            "$className": "Folder"
-          }
+          "GameModel": { "$className": "Folder" }
         },
+
         "Infection Tag": {
           "$path": "src/server/Infection Tag.luau"
         },
+
         "Crazy Colors": {
           "$path": "src/server/CrazyColors.luau",
-          "GameModel": {
-            "$className": "Folder"
-          }
+          "GameModel": { "$className": "Folder" }
         },
+
         "Tile Dash": {
           "$path": "src/server/Tile Dash.luau",
           "GameModel": {
             "$className": "Folder",
-            "Lava": {
-              "$className": "Part"
-            },
-            "Spawn": {
-              "$className": "Part"
-            },
-            "Tiles": {
-              "$className": "Folder"
-            }
+            "Lava": { "$className": "Part" },
+            "Spawn": { "$className": "Part" },
+            "Tiles": { "$className": "Folder" }
           }
         },
+
         "Spleef": {
           "$path": "src/server/Spleef.luau",
           "GameModel": {
             "$className": "Folder",
             "Levels": {
               "$className": "Folder",
-              "Level": {
-                "$className": "Model"
-              }
+              "Level": { "$className": "Model" }
             },
-            "KillBrick": {
-              "$className": "Part"
-            },
-            "SpawnPoint": {
-              "$className": "Part"
-            }
+            "KillBrick": { "$className": "Part" },
+            "SpawnPoint": { "$className": "Part" }
           }
         }
       }
     },
+
     "StarterGui": {
+      "HUD": {
+        "$className": "ScreenGui",
+
+        "TopBar": {
+          "$className": "Frame",
+
+          "CoinsLabel": {
+            "$className": "Frame",
+
+            "MainFrame": {
+              "$className": "ImageLabel"
+            },
+            "Icon": {
+              "$className": "ImageLabel"
+            },
+            "CoinsLabel": {
+              "$className": "TextLabel"
+            }
+          }
+        },
+
+        "Buttons": {
+          "$className": "Frame",
+
+          "SideButtons": {
+            "$className": "Frame",
+
+            "AfkMode": {
+              "$className": "Frame",
+              "AfkButton": {
+                "$className": "ImageButton" 
+              }
+            },
+
+            "ShopButton": {
+              "$className": "Frame",
+              "MainFrame": { "$className": "ImageLabel" },
+              "Icon": { "$className": "ImageLabel" },
+              "Text": {
+                "$className": "TextLabel",
+                "UIStroke": { "$className": "UIStroke" }
+              }
+            },
+
+            "QuestsButton": {
+              "$className": "Frame",
+              "MainFrame": { "$className": "ImageLabel" },
+              "Icon": { "$className": "ImageLabel" },
+              "Text": {
+                "$className": "TextLabel",
+                "UIStroke": { "$className": "UIStroke" }
+              }
+            },
+
+            "DailyRewardButton": {
+              "$className": "Frame",
+              "MainFrame": { "$className": "ImageLabel" },
+              "Icon": { "$className": "ImageLabel" },
+              "Text": {
+                "$className": "TextLabel",
+                "UIStroke": { "$className": "UIStroke" }
+              }
+            },
+
+            "InviteFriendsButton": {
+              "$className": "Frame",
+              "MainFrame": { "$className": "ImageLabel" },
+              "Icon": { "$className": "ImageLabel" },
+              "Text": {
+                "$className": "TextLabel",
+                "UIStroke": { "$className": "UIStroke" }
+              }
+            }
+          },
+
+          "BottomButtons": {
+            "$className": "Frame",
+
+            "SettingsButton": {
+              "$className": "Frame",
+              "MainFrame": { "$className": "ImageLabel" },
+              "Icon": { "$className": "ImageLabel" },
+              "Text": {
+                "$className": "TextLabel",
+                "UIStroke": { "$className": "UIStroke" }
+              }
+            },
+
+            "SpectateButton": {
+              "$className": "Frame",
+              "MainFrame": { "$className": "ImageLabel" },
+              "Icon": { "$className": "ImageLabel" },
+              "Text": {
+                "$className": "TextLabel",
+                "UIStroke": { "$className": "UIStroke" }
+              }
+            }
+          }
+        }
+      },
+
       "VotingFrame": {
         "$className": "ScreenGui",
         "MainFrame": {
           "$className": "Frame",
           "VotingClient": {
             "$path": "src/client/VotingClient.client.lua",
-            "Selected": {
-              "$className": "Frame"
-            }
+            "Selected": { "$className": "Frame" }
           },
           "Columns": {
             "$className": "Frame",
-            "ImageButton": {
-              "$className": "ImageButton"
-            }
+            "ImageButton": { "$className": "ImageButton" }
           }
         }
       },
+
       "ShopGui": {
         "$className": "ScreenGui",
         "ShopGui": {
           "$path": "src/client/ShopGui.client.lua"
         }
       },
+
       "Stats": {
         "$className": "ScreenGui",
         "StatusUpdater": {
@@ -218,20 +251,18 @@
               "$className": "UIAspectRatioConstraint"
             }
           },
-          "WinsLabel": {
-            "$className": "TextLabel"
-          }
+          "WinsLabel": { "$className": "TextLabel" }
         }
       },
+
       "StatusGui": {
         "$className": "ScreenGui",
-        "StatusLabel": {
-          "$className": "TextLabel"
-        },
+        "StatusLabel": { "$className": "TextLabel" },
         "StatusUpdater": {
           "$path": "src/client/StatusUpdater.client.lua"
         }
       },
+
       "AfkMode": {
         "$className": "ScreenGui",
         "AfkGui": {
@@ -239,12 +270,11 @@
         },
         "AfkButton": {
           "$className": "TextButton",
-          "AfkStatus": {
-            "$className": "TextLabel"
-          }
+          "AfkStatus": { "$className": "TextLabel" }
         }
       }
     },
+
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "LowGravity": {
@@ -252,11 +282,9 @@
         }
       }
     },
-    "Workspace": {
-    },
-    "Lighting": {
-    },
-    "SoundService": {
-    }
+
+    "Workspace": {},
+    "Lighting": {},
+    "SoundService": {}
   }
 }
