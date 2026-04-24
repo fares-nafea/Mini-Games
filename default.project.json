@@ -154,7 +154,7 @@
             "QuestItemTemplate": {
               "$className": "Frame",
               "MainFrame": {
-                "className": "Frame",
+                "$className": "Frame",
 
                 "Title": {
                   "$className": "TextLabel"
@@ -217,7 +217,7 @@
         }
       },
       "DailyRewardUI": {
-        "$className": "Frame",
+        "$className": "ScreenGui",
         "Header": {
           "$className": "Frame",
           "Icon": {
@@ -253,7 +253,7 @@
         }
       },
       "SpectateUI": {
-        "$className": "Frame",
+        "$className": "ScreenGui",
         "Header": {
           "$className": "Frame",
           "Title": {
