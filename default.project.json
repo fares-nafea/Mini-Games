@@ -115,6 +115,111 @@
     },
 
     "StarterGui": {
+      "RuboxShop": {
+        "$className": "ScreenGui",
+        "MainFrame": {
+          "$className": "Frame",
+          "Header": {
+            "$className": "Frame",
+            "Title": {
+              "$className": "TextLabel"
+            },
+            "Icon": {
+              "$className": "ImageLabel"
+            },
+            "CloseButton": {
+              "$className": "ImageButton"
+            }
+          },
+          "TabBar": {
+            "$className": "Frame",
+            "ScrollFrame": {
+              "$className": "ScrollFrame",
+              "BigCardTemplate1": {
+                "$className": "Frame",
+                "Tile": {
+                  "$className": "TextLabel"
+                },
+                "Description": {
+                  "$className": "TextLabel"
+                },
+                "Icon": {
+                  "$className": "ImageLabel"
+                },
+                "Price": {
+                  "$className": "TextLabel",
+                  "RuboxIcon": {
+                    "$className": "ImageLabel"
+                  }
+                },
+                "BuyButton": {
+                  "$className": "ImageButton"
+                }
+              },
+              "TitleFrameTemplate": {
+                "$className": "Frame",
+                "Title": {
+                  "$className": "TextLabel"
+                }
+              },
+              "BigCardTemplate2": {
+                "$className": "Frame",
+                "Tile": {
+                  "$className": "TextLabel"
+                },
+                "Description": {
+                  "$className": "TextLabel"
+                },
+                "Icon": {
+                  "$className": "ImageLabel"
+                },
+                "Price1": {
+                  "$className": "TextLabel",
+                  "RuboxIcon": {
+                    "$className": "ImageLabel"
+                  }
+                },
+                "Price2": {
+                  "$className": "TextLabel",
+                  "RuboxIcon": {
+                    "$className": "ImageLabel"
+                  }
+                },
+                "Price3": {
+                  "$className": "TextLabel",
+                  "RuboxIcon": {
+                    "$className": "ImageLabel"
+                  }
+                },
+                "BuyButton1": {
+                  "$className": "ImageButton"
+                },
+                "BuyButton2": {
+                  "$className": "ImageButton"
+                },
+                "BuyButton3": {
+                  "$className": "ImageButton"
+                }
+              },
+              "SmallCardTemplate2": {
+                "$className": "Frame",
+                "Title": {
+                  "$className": "TextLabel"
+                },
+                "Price": {
+                  "$className": "TextLabel",
+                  "RuboxIcon": {
+                    "$className": "ImageLabel"
+                  }
+                },
+                "BuyButton": {
+                  "$className": "ImageButton"
+                }
+              }
+            }
+          }
+        }
+      },
       "VotingFrame": {
         "$className": "ScreenGui",
         "MainFrame": {
