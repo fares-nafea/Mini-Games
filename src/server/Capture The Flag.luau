@@ -8,6 +8,8 @@ local redColor = Color3.fromRGB(255, 58, 51)
 local prepTime = 2
 local roundTime = 100
 
+local carrierDebuff = 6
+
 function MiniGame.RunGame()
 
     -- Set up game
@@ -106,7 +108,7 @@ function MiniGame.RunGame()
                 newMarker.Parent = newGame.Markers
                 newMarker.Adornee = hit.Parent.HumanoidRootPart
 
-                hit.Parent.Humanoid.WalkSpeed = 11 -- Slow down carrier
+                hit.Parent.Humanoid.WalkSpeed -= carrierDebuff -- Slow down carrier
 
                 if flag.Name == "Red" then -- Red Stolen
                     newMarker.MainFrame.BackgroundColor3 = redColor
