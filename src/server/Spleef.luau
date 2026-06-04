@@ -20,8 +20,8 @@ gameModel.KillBrick.Touched:Connect(_G.KillFunction)
 
 local hitTiles = {}
 
-for i, tile in ipairs(gameModel.Levels:GetDescendants()) do
-    if tile.ClassName ~= "Part" then continue end
+for i, tile in ipairs(gameModel.Levels:GetChildren()) do
+    if tile.Name ~= "Tile" then continue end
 
     tile.Touched:Connect(function(hit)
 
@@ -41,7 +41,7 @@ for i, tile in ipairs(gameModel.Levels:GetDescendants()) do
 
         tile.Transparency = 1
         tile.CanCollide = false
-
+        
     end)
 
 end
@@ -51,7 +51,7 @@ function Spleef.RunGame()
     local spawnPoint = gameModel.Spawn
     spawnPoint.Parent = workspace
     task.wait()
-
+   
     gameModel.Parent = workspace
 
 
@@ -59,7 +59,9 @@ function Spleef.RunGame()
 
     local players = workspace.InGame:GetChildren()
     for i, char in ipairs(players) do
-        char.Humanoid.HipHeight -= minusHeight
+        if char then
+            char.Humanoid.HipHeight -= minusHeight
+        end
     end
 
     for countDown = 10, 1, -1 do
@@ -75,7 +77,7 @@ function Spleef.RunGame()
     spawnPoint.Parent = gameModel
 
     _G.gameStatus.Value = "Last one alive wins!"
-
+    task.wait(10)
     while #workspace.InGame:GetChildren() > 1 do
         workspace.InGame.ChildRemoved:Wait()
     end
@@ -91,13 +93,13 @@ function Spleef.RunGame()
 
     gameModel.Parent = script
 
+
     coroutine.wrap(function()
         for i, tile in ipairs(hitTiles) do
-            
+
             tile.Size = tileSize
             tile.Transparency = 0
             tile.CanCollide = true
-
         end
     end)()
 

@@ -117,6 +117,9 @@
     "StarterGui": {
       "RuboxShop": {
         "$className": "ScreenGui",
+        "RuboxShopButton": {
+          "$className": "ImageButton"
+        },
         "MainFrame": {
           "$className": "Frame",
           "Header": {
@@ -134,7 +137,7 @@
           "TabBar": {
             "$className": "Frame",
             "ScrollFrame": {
-              "$className": "ScrollFrame",
+              "$className": "ScrollingFrame",
               "BigCardTemplate1": {
                 "$className": "Frame",
                 "Tile": {
