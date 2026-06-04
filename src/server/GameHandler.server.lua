@@ -2,7 +2,7 @@ local miniGames = game.ServerStorage:WaitForChild("MiniGames"):GetChildren()
 local gameStatus = game.ReplicatedStorage:WaitForChild("GameStatus")
 _G.gameStatus = gameStatus
 
-local lobbyCFrame = workspace:WaitForChild("Lobby"):WaitForChild("SpawnLocation"):WaitForChild("SpawnLocation").CFrame + Vector3.yAxis*5
+local lobbyCFrame = workspace:WaitForChild("Lobby"):WaitForChild("SpawnLocation"):WaitForChild("SpawnLocation").CFrame + Vector3.yAxis * 5
 
 local TeleportPlayers = require(game.ServerStorage:WaitForChild("TeleportPlayers"))
 _G.TeleportPlayers = TeleportPlayers
@@ -24,108 +24,94 @@ _G.GameQueue = {}
 
 while true do
 
-    -- Player requirement
-    if #game.Players:GetPlayers() < MIN_PLAYERS then
-        gameStatus.Value = MIN_PLAYERS .. "players needed to start"
-        repeat
-            task.wait(1)
-        until #game.Players:GetPlayers() >= MIN_PLAYERS
-    end
- 
-    -- Intermission
-    for countDown = INTERMISSION, 0, -1 do
+	if #game.Players:GetPlayers() < MIN_PLAYERS then
+		gameStatus.Value = MIN_PLAYERS .. " players needed to start"
+		repeat
+			task.wait(1)
+		until #game.Players:GetPlayers() >= MIN_PLAYERS
+	end
 
-        gameStatus.Value = "Intermission " ..countDown
-        task.wait(1)
+	for countDown = INTERMISSION, 0, -1 do
+		gameStatus.Value = "Intermission " .. countDown
+		task.wait(1)
+	end
 
-    end
+	local chosenGameModule = nil
 
-    local chosenGameModule = nil
+	if #_G.GameQueue ~= 0 then
+		chosenGameModule = _G.GameQueue[1]
+		table.remove(_G.GameQueue, 1)
+	else
 
-    -- dev product
-    if # _G.GameQueue ~= 0 then
-        chosenGameModule = _G.GameQueue[1]
-        table.remove(_G.GameQueue, 1)
+		local gameVotes = {}
+		local plrVotes = {}
+		local selectedGames = {}
+		local games = game.ServerStorage.MiniGames:GetChildren()
 
-    else --> Voting
+		for i = 1, 3 do
 
-        local gameVotes = {}
-        local plrVotes = {}
-        local selectedGames = {}
-        local games = game.ServerStorage.MiniGames:GetChildren()
+			local chosenGame = games[math.random(#games)]
+			table.remove(games, table.find(games, chosenGame))
 
-        for i = 1, 3 do
+			table.insert(selectedGames, {
+				Name = chosenGame.Name,
+				Img = chosenGame:GetAttribute("Img")
+			})
 
-            local chosenGame = games[math.random(#games)]
-            table.remove(games, table.find(games, chosenGame))
-            table.insert(selectedGames, {
-                Name = chosenGame.Name,
-                Img = chosenGame:GetAttribute("Img")
-            })
+			gameVotes[chosenGame.Name] = 0
+		end
 
-            print(#games)
-            gameVotes[chosenGame.Name] = 0
-        end
+		VotingEvent:FireAllClients(selectedGames)
 
-        VotingEvent:FireAllClients(selectedGames)
+		UpdateVotes.OnServerInvoke = function(player, vote)
 
-        UpdateVotes.OnServerInvoke = function(player, vote)
-            if vote then
+			if vote then
 
-                local gameModule = game.ServerStorage.MiniGames:FindFirstChild(vote)
-                if not gameModule or not gameVotes[gameModule.Name] then
-                    warn(tostring(vote) .. " is not a votable minigame")
-                    return gameVotes
-                end
+				local gameModule = game.ServerStorage.MiniGames:FindFirstChild(vote)
 
-                local playerVote = plrVotes[player.UserId]
-                if playerVote then
-                    gameVotes[playerVote] -= 1
-                end
-                plrVotes[player.UserId] = vote
+				if not gameModule or gameVotes[gameModule.Name] == nil then
+					warn(tostring(vote) .. " is not a votable minigame")
+					return gameVotes
+				end
 
-                gameVotes[vote] += 1
+				local playerVote = plrVotes[player.UserId]
 
-            end
+				if playerVote then
+					gameVotes[playerVote] -= 1
+				end
 
-            return gameVotes
-        end
+				plrVotes[player.UserId] = vote
+				gameVotes[vote] += 1
+			end
 
-        -- Let players vote
-        for countDown = VOTE_TIME, 0, -1 do
+			return gameVotes
+		end
 
-            gameStatus.Value = "Vote ( " .. countDown .. " )"
-            task.wait(1)
+		for countDown = VOTE_TIME, 0, -1 do
+			gameStatus.Value = "Vote ( " .. countDown .. " )"
+			task.wait(1)
+		end
 
-        end
+		VotingEvent:FireAllClients(nil)
+		UpdateVotes.OnServerInvoke = nil
 
-        -- End of Voting
-        VotingEvent:FireAllClients(nil)
-        UpdateVotes.OnServerInvoke = nil
+		local heighestVotes = 0
 
-        -- choose heighest voted game
-        local heighestVotes = 0
-        for name, votes in pairs(gameVotes) do
-            if votes >= heighestVotes then
-                
-                chosenGameModule = game.ServerStorage.MiniGames:FindFirstChild(name)
-                heighestVotes = votes
-                
-            end
-        end
-    end
+		for name, votes in pairs(gameVotes) do
+			if votes >= heighestVotes then
+				chosenGameModule = game.ServerStorage.MiniGames:FindFirstChild(name)
+				heighestVotes = votes
+			end
+		end
+	end
 
+	gameStatus.Value = chosenGameModule.Name .. " has been chosen!"
+	task.wait(2)
 
+	require(chosenGameModule).RunGame()
 
-    gameStatus.Value = chosenGameModule.Name .. " has been chosen!"
-    task.wait(2)
-
-    -- Run mini game
-    require(chosenGameModule).RunGame()
-
-    -- End mini game
-    TeleportPlayers(lobbyCFrame)
-    gameStatus.Value = "End of Game!"
-    task.wait(1)
+	TeleportPlayers(lobbyCFrame)
+	gameStatus.Value = "End of Game!"
+	task.wait(1)
 
 end
