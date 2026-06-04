@@ -99,6 +99,15 @@
             "Tiles": { "$className": "Folder" }
           }
         },
+        "Boulder Run": {
+          "$path": "src/server/Boulder Run.luau",
+          "GameModel": {
+            "$className": "Folder"
+          },
+          "Boulder": {
+            "$className": "Part"
+          }
+        },
 
         "Spleef": {
           "$path": "src/server/Spleef.luau",
