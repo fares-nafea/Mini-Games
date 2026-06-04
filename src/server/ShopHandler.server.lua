@@ -76,7 +76,7 @@ function PowerPurchased(player, playerCharacter, itemInfo, playerWins)
         return "A Power is already active"
     end
 
-    local success, powerError = pcall(function()
+    local success, result = pcall(function()
 
         local args = Powers[itemInfo["Name"]](player, playerCharacter)
         player.CurrentPower.Value = args[1]
@@ -90,6 +90,7 @@ function PowerPurchased(player, playerCharacter, itemInfo, playerWins)
     if success then
         return itemInfo['Name'] .. " activated"
     else
+        warn(result)
         return 'Error during purchase'
     end
 

@@ -3,21 +3,30 @@ local MainFrame = ScreenGui:WaitForChild("ShopFrame")
 local ShopButton = ScreenGui:WaitForChild("ShopButton")
 local ItemFrames = MainFrame:WaitForChild("ScrollingFrame"):GetChildren()
 
+local NoticeLabel = MainFrame:WaitForChild("NoticeLabel")
+
 local ItemPurchased = game.ReplicatedStorage:WaitForChild("Events"):WaitForChild("ItemPurchased")
 
 -- Setup
 for i, frame in ipairs(ItemFrames) do
 
     if not frame:IsA("TextButton") then continue end
-    
     frame.PriceLabel.Text = tostring(frame:GetAttribute("Price"))
 
     frame.Activated:Connect(function()
 
         local purchaseSuccess = ItemPurchased:InvokeServer(frame)
-        print(purchaseSuccess)
+
+        if purchaseSuccess ~= "Successful" then
+            local newLabel = NoticeLabel:Clone()
+            newLabel.Text = tostring(purchaseSuccess)
+            newLabel.Parent = NoticeLabel.Parent
+            task.wait(3)
+            newLabel:Destroy()
+        end
 
     end)
+
 end
 
 local defaultSize = MainFrame.Size

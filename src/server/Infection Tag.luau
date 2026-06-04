@@ -31,7 +31,7 @@ function MiniGame.RunGame()
 
     local tagConns = {}
     local function taggerTouched(hit)
-        local humanoid = hit.Parent:FindFirstChild("Humanoid") -- ✅ #1
+        local humanoid = hit.Parent:FindFirstChild("Humanoid")
         if not humanoid then return end
 
         if humanoid:GetAttribute("Tagged") then print('is tagged') return end
@@ -45,14 +45,18 @@ function MiniGame.RunGame()
         table.insert(tagConns, hit.Parent.HumanoidRootPart.Touched:Connect(taggerTouched))
     end
 
+    _G.ExtraSpeed = "DISABLED"
     for i, char in ipairs(currentInGame) do
         char.Humanoid.WalkSpeed = runnerSpeed
 
         local plr = game.Players:GetPlayerFromCharacter(char)
         plr.CameraMaxZoomDistance = 35
+        if tostring(plr.CurrentPower.Value) == "ExtraSpeed" then
+            plr.CurrentPower.Value:Destroy()
+        end
     end
 
-    taggerTouched(taggerChar.HumanoidRootPart) -- ✅ #2
+    taggerTouched(taggerChar.HumanoidRootPart)
 
     for countDown = 10, 0 , -1 do
 
@@ -95,7 +99,7 @@ function MiniGame.RunGame()
     end
 
     for i, winner in ipairs(winners) do
-        local plr = game.Players:GetPlayerFromCharacter(winner) -- ✅ #4
+        local plr = game.Players:GetPlayerFromCharacter(winner)
         plr.leaderstats.Wins.Value += 1
     end
 
@@ -109,6 +113,7 @@ function MiniGame.RunGame()
     end
 
     task.wait(5)
+    _G.ExtraSpeed = nil
     newGame:Destroy()
     taggedFolder:Destroy()
 end

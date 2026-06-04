@@ -21,6 +21,18 @@ Players.PlayerAdded:Connect(function(player)
     local currentPower = Instance.new("ObjectValue", player)
     currentPower.Name = "CurrentPower"
 
+    player.CharacterAdded:Connect(function()
+        currentItem.Value = nil
+        if player.Character then
+            player.Character.Humanoid.Died:Once(function()
+                local power = currentPower.Value
+                if power then
+                    power:Destroy()
+                end
+            end)
+        end
+    end)
+
     -- Load data if it exits
     local plrWinsData = WinsDataStore:GetAsync(player.UserId)
 
@@ -38,18 +50,6 @@ Players.PlayerAdded:Connect(function(player)
 
         end
     end
-
-    player.CharacterAdded:Connect(function()
-        currentItem.Value = nil
-        if player.Character then
-            player.Character.Humanoid.Died:Once(function()
-                local power = currentPower.Value
-                if power then
-                    power:Destroy()
-                end
-            end)
-        end
-    end)
 
 end)
 
