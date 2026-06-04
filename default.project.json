@@ -81,7 +81,8 @@
         },
 
         "Infection Tag": {
-          "$path": "src/server/Infection Tag.luau"
+          "$path": "src/server/Infection Tag.luau",
+          "GameModel": { "$className": "Folder" }
         },
 
         "Crazy Colors": {
