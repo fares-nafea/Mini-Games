@@ -18,7 +18,7 @@ Players.PlayerAdded:Connect(function(player)
     local currentItem = Instance.new("ObjectValue", player)
     currentItem.Name = "CurrentItem"
 
-    local currentPower = Instance.new("BoolValue", player)
+    local currentPower = Instance.new("ObjectValue", player)
     currentPower.Name = "CurrentPower"
 
     -- Load data if it exits
@@ -41,7 +41,14 @@ Players.PlayerAdded:Connect(function(player)
 
     player.CharacterAdded:Connect(function()
         currentItem.Value = nil
-        currentPower.Value = nil
+        if player.Character then
+            player.Character.Humanoid.Died:Once(function()
+                local power = currentPower.Value
+                if power then
+                    power:Destroy()
+                end
+            end)
+        end
     end)
 
 end)

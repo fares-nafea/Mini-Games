@@ -2,6 +2,8 @@ local Powers = {}
 
  -- Low Gravity
 local lowGravityEvent = game.ReplicatedStorage:WaitForChild("Events"):WaitForChild("LowGravity")
+local defaultGravity = workspace.Gravity
+local setGravity = 25
 local gravityTime = 30
 
 function Powers.LowGravity(player, plrChar)
@@ -9,14 +11,16 @@ function Powers.LowGravity(player, plrChar)
     local effect = script.LowGravity:Clone()
     effect.Parent = plrChar.HumanoidRootPart
 
-    lowGravityEvent:FireClient(player, gravityTime)
+    lowGravityEvent:FireClient(player, setGravity)
 
-    task.wait(gravityTime)
+    coroutine.wrap(function()
+        task.wait(gravityTime)
+        effect:Destroy()
+    end)()
 
-    if not effect then return end
-    effect:Destroy()
-    player.CurrentPower.Value = false
-
+    return {effect, function()
+        lowGravityEvent:FireClient(player, defaultGravity)
+    end}
 end
 
 -- Extra Speed
@@ -30,13 +34,14 @@ function Powers.ExtraSpeed(player, plrChar)
 
     plrChar.Humanoid.WalkSpeed += speedBonus
 
-    task.wait(speedTime)
+    coroutine.wrap(function()
+        task.wait(speedTime)
+        effect:Destroy()
+    end)()
 
-    plrChar.Humanoid.WalkSpeed -= speedBonus
-
-    if not effect then return end
-    effect:Destroy()
-    player.CurrentPower.Value = false
+    return {effect, function()
+        plrChar.Humanoid.WalkSpeed -= speedBonus
+    end}
 end
 
 return Powers

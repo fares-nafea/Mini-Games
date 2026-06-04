@@ -17,27 +17,19 @@ ItemPurchased.OnServerInvoke = function(player, frame)
 
     if itemInfo["Type"] == "Aura" then
 
-        player.leaderstats.Wins.Value -= itemInfo["Price"]
-
         if ItemPurchased(player, playerCharacter, itemInfo, playerWins) == false then
-            return
+            return "Successful"
         end
 
-        if player.Items:FindFirstChild(itemInfo["Name"]) then
-            return
-        end
+    elseif itemInfo["Type"] == "Power" then
 
-
-    elseif itemInfo["Type"] == "Power" and player.CurrentPower.Value == false then
-
-        player.leaderstats.Wins.Value -= itemInfo["Price"]
-
-        player.CurrentPower.Value = true
-        PowerPurchased(player, playerCharacter, itemInfo, playerWins)
+        return PowerPurchased(player, playerCharacter, itemInfo, playerWins)
 
     else
-        return
+        return "Item type not found"
     end
+
+    player.leaderstats.Wins.Value -= itemInfo["Price"]
     
     return "Successful"
 end
@@ -77,13 +69,28 @@ end
 
 function PowerPurchased(player, playerCharacter, itemInfo, playerWins)
 
+    if _G[itemInfo["Name"]] == "DISABLED" then
+        return "This power is disabled for this game"
+    end
+    if player.CurrentPower.Value then
+        return "A Power is already active"
+    end
+
     local success, powerError = pcall(function()
 
-        Powers[itemInfo["Name"]](player, playerCharacter)
+        local args = Powers[itemInfo["Name"]](player, playerCharacter)
+        player.CurrentPower.Value = args[1]
 
+        args[1].Destroying:Connect(function()
+            player.CurrentPower.Value = nil
+            args[2]() -- Reverse power
+        end)
     end)
 
-    if not success then
-        warn(player, powerError)
+    if success then
+        return itemInfo['Name'] .. " activated"
+    else
+        return 'Error during purchase'
     end
+
 end
