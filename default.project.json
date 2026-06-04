@@ -105,8 +105,7 @@
           "GameModel": {
             "$className": "Folder",
             "Levels": {
-              "$className": "Folder",
-              "Level": { "$className": "Model" }
+              "$className": "Folder"
             },
             "KillBrick": { "$className": "Part" },
             "SpawnPoint": { "$className": "Part" }
