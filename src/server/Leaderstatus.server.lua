@@ -34,21 +34,25 @@ Players.PlayerAdded:Connect(function(player)
     end)
 
     -- Load data if it exits
-    local plrWinsData = WinsDataStore:GetAsync(player.UserId)
-
-    if plrWinsData then
+    local winsOk, plrWinsData = pcall(function()
+        return WinsDataStore:GetAsync(player.UserId)
+    end)
+    if winsOk and plrWinsData then
         winsStat.Value = plrWinsData
+    elseif not winsOk then
+        warn("Failed to load wins for", player.Name, ":", plrWinsData)
     end
 
-    local itemsData = ItemDataStore:GetAsync(player.UserId)
-
-    if itemsData then
+    local itemsOk, itemsData = pcall(function()
+        return ItemDataStore:GetAsync(player.UserId)
+    end)
+    if itemsOk and itemsData then
         for i, savedItem in ipairs(itemsData) do
-
             local itemValue = Instance.new("StringValue", itemsFolder)
             itemValue.Name = savedItem
-
         end
+    elseif not itemsOk then
+        warn("Failed to load items for", player.Name, ":", itemsData)
     end
 
 end)
@@ -56,19 +60,25 @@ end)
 local function SaveData(player)
 
     local currentWins = player.leaderstats.Wins.Value
-    WinsDataStore:SetAsync(player.UserId, currentWins)
+    local winsOk, winsErr = pcall(function()
+        WinsDataStore:SetAsync(player.UserId, currentWins)
+    end)
+    if not winsOk then
+        warn("Failed to save wins for", player.Name, ":", winsErr)
+    end
 
     -- Saved Items
     local savedItems = {}
-
-    local playersItems = player.Items:GetChildren()
-    for i, itemValue in ipairs(playersItems) do
-
+    for i, itemValue in ipairs(player.Items:GetChildren()) do
         table.insert(savedItems, itemValue.Name)
-
     end
 
-    ItemDataStore:SetAsync(player.UserId, savedItems)
+    local itemsOk, itemsErr = pcall(function()
+        ItemDataStore:SetAsync(player.UserId, savedItems)
+    end)
+    if not itemsOk then
+        warn("Failed to save items for", player.Name, ":", itemsErr)
+    end
 end
 
 Players.PlayerRemoving:Connect(SaveData)

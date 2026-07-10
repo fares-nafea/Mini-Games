@@ -204,7 +204,7 @@ function MiniGame.RunGame()
     end
 
     if blueCarrier then
-        redCarrier.Humanoid.WalkSpeed = game.StarterPlayer.CharacterWalkSpeed
+        blueCarrier.Humanoid.WalkSpeed = game.StarterPlayer.CharacterWalkSpeed
     end
     task.wait(4)
 

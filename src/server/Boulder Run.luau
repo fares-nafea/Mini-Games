@@ -97,6 +97,7 @@ function MiniGame.RunGame()
 
     -- End of game
     if gameWon then
+        gameWon.leaderstats.Wins.Value += 1
         _G.gameStatus.Value = gameWon.Name .. " got to the top!"
     else
         _G.gameStatus.Value = "No one reached the top"
