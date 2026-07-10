@@ -48,4 +48,6 @@ function MiniGame.RunGame()
     newGame:Destroy()
 end
 
+MiniGame.MinPlayers = 1
+
 return MiniGame

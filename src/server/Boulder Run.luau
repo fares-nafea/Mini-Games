@@ -108,4 +108,6 @@ function MiniGame.RunGame()
 
 end
 
+MiniGame.MinPlayers = 1
+
 return MiniGame

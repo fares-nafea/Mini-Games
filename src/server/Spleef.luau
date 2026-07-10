@@ -115,4 +115,6 @@ function Spleef.RunGame()
 	spawnPoint.CanCollide = true
 end
 
+Spleef.MinPlayers = 2
+
 return Spleef

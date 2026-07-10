@@ -108,4 +108,6 @@ function TileDash.RunGame()
 end
 
 
+TileDash.MinPlayers = 1
+
 return TileDash

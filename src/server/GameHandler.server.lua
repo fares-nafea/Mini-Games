@@ -106,9 +106,24 @@ while true do
 	end
 
 	gameStatus.Value = chosenGameModule.Name .. " has been chosen!"
-	task.wait(2)
 
-	require(chosenGameModule).RunGame()
+	local gameModule = require(chosenGameModule)
+	local minPlayers = gameModule.MinPlayers or 1
+	local activePlayers = 0
+	for _, plr in ipairs(game.Players:GetPlayers()) do
+		if not plr:GetAttribute("AFK") then
+			activePlayers += 1
+		end
+	end
+
+	if activePlayers < minPlayers then
+		gameStatus.Value = chosenGameModule.Name .. " needs at least " .. minPlayers .. " players!"
+		task.wait(3)
+		continue
+	end
+
+	task.wait(2)
+	gameModule.RunGame()
 
 	TeleportPlayers(lobbyCFrame)
 	gameStatus.Value = "End of Game!"

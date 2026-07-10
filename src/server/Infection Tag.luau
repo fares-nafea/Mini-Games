@@ -118,4 +118,6 @@ function MiniGame.RunGame()
     taggedFolder:Destroy()
 end
 
+MiniGame.MinPlayers = 2
+
 return MiniGame
