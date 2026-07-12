@@ -134,7 +134,16 @@
           },
           "Columns": {
             "$className": "Frame",
-            "ImageButton": { "$className": "ImageButton" }
+
+            "ImageButton": { 
+              "$className": "ImageButton",
+              "NameLabel": {
+                "$className": "TextLabel"
+              },
+              "VotesLabel": {
+                "$className": "TextLabel"
+              }
+            }
           }
         }
       },
@@ -143,6 +152,18 @@
         "$className": "ScreenGui",
         "ShopGui": {
           "$path": "src/client/ShopGui.client.lua"
+        },
+        "ShopFrame": {
+          "$className": "Frame",
+          "ScrollingFrame": {
+            "$className": "ScrollingFrame"
+          },
+          "NoticeLabel": {
+            "$className": "TextLabel"
+          }
+        },
+        "ShopButton": {
+          "$className": "TextButton"
         }
       },
 
@@ -191,7 +212,14 @@
       }
     },
 
-    "Workspace": {},
+    "Workspace": {
+      "Lobby": {
+        "$className": "Folder",
+        "SpawnLocation": {
+          "$className": "SpawnLocation"
+        }
+      }
+    },
     "Lighting": {},
     "SoundService": {}
   }

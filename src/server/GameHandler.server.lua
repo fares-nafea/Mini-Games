@@ -2,7 +2,7 @@ local miniGames = game.ServerStorage:WaitForChild("MiniGames"):GetChildren()
 local gameStatus = game.ReplicatedStorage:WaitForChild("GameStatus")
 _G.gameStatus = gameStatus
 
-local lobbyCFrame = workspace:WaitForChild("Lobby"):WaitForChild("SpawnLocation"):WaitForChild("SpawnLocation").CFrame + Vector3.yAxis * 5
+local lobbyCFrame = workspace:WaitForChild("Lobby"):WaitForChild("SpawnLocation").CFrame + Vector3.yAxis * 5
 
 local TeleportPlayers = require(game.ServerStorage:WaitForChild("TeleportPlayers"))
 _G.TeleportPlayers = TeleportPlayers
@@ -128,5 +128,4 @@ while true do
 	TeleportPlayers(lobbyCFrame)
 	gameStatus.Value = "End of Game!"
 	task.wait(1)
-
 end
