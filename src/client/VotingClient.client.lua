@@ -11,7 +11,7 @@ for i, column in ipairs(MainFrame:WaitForChild("Columns"):GetChildren()) do
 end
 
 local defaultSize = votingColumns[1].Size
-local selectedSize = defaultSize + UDim2.fromOffset(15, 15)
+local selectedSize = defaultSize + UDim2.fromOffset(5, 5)
 local selectedBorder = script:WaitForChild("Selected")
 local animTime = .2
 

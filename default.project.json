@@ -213,6 +213,9 @@
     },
 
     "Workspace": {
+      "InGame": {
+        "$className": "Folder"
+      },
       "Lobby": {
         "$className": "Folder",
         "SpawnLocation": {
