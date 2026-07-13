@@ -6,7 +6,7 @@ function BasicEnding()
 
         if plrChar.Humanoid.Health <= 0 then continue end
         local plr = game.Players:GetPlayerFromCharacter(plrChar)
-        plr.leaderstats.Wins.Value += 1
+        plr.leaderstats.Wins.Value += 100
 
         endText = endText .. plr.Name .. " "
 
