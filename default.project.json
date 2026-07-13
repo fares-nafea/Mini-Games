@@ -4,6 +4,9 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
+      "MiniGames": {
+        "$className": "Folder"
+      },
       "GameStatus": {
         "$className": "StringValue"
       },

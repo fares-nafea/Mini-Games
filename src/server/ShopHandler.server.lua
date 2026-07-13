@@ -17,8 +17,12 @@ ItemPurchased.OnServerInvoke = function(player, frame)
 
     if itemInfo["Type"] == "Aura" then
 
-        if ItemPurchased(player, playerCharacter, itemInfo, playerWins) == false then
-            return "Successful"
+        local result = EquipItem(player, playerCharacter, itemInfo, playerWins)
+        if result ~= true then
+            if result == false then
+                return "Successful"
+            end
+            return result
         end
 
     elseif itemInfo["Type"] == "Power" then
@@ -36,10 +40,13 @@ end
 
 
 
-function ItemPurchased(player, playerCharacter, itemInfo, playerWins)
+function EquipItem(player, playerCharacter, itemInfo, playerWins)
 
     local chosenItem = Items:FindFirstChild(itemInfo["Name"])
-    if not chosenItem then warn(itemInfo["Name"], "does not exist") return end
+    if not chosenItem then
+        warn(itemInfo["Name"], "does not exist")
+        return "Item not found"
+    end
 
     -- Equip
     if player.CurrentItem.Value then

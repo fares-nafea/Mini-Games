@@ -45,7 +45,7 @@ function MiniGame.RunGame()
         local posXMax = boulderSpawn.Position.X + (boulderSpawn.Size.X / 2)
 
         newBoulder.Position = Vector3.new(
-            math.random(posXMin, posXMax),
+            posXMin + math.random() * (posXMax - posXMin),
             boulderSpawn.Position.Y,
             boulderSpawn.Position.Z
         )

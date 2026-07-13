@@ -34,7 +34,7 @@ function MiniGame.RunGame()
         local humanoid = hit.Parent:FindFirstChild("Humanoid")
         if not humanoid then return end
 
-        if humanoid:GetAttribute("Tagged") then print('is tagged') return end
+        if humanoid:GetAttribute("Tagged") then return end
         humanoid:SetAttribute("Tagged", true)
         humanoid.WalkSpeed = taggedSpeed
 
