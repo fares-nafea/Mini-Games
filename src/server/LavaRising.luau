@@ -37,6 +37,8 @@ function MiniGame.RunGame()
     -- Count down
     for countDown = riseTime + riseDelay, 0, -1 do
 
+        if #workspace.InGame:GetChildren() == 0 then break end
+
         _G.gameStatus.Value = "Get to the top ( "..countDown.." )"
         task.wait(1)
 

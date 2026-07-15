@@ -41,12 +41,17 @@ function MiniGames.RunGame()
 
     -- Start game
     for round = 1, totalRounds do
+      if #workspace.InGame:GetChildren() == 0 then break end
+
       --choosing time
      for countDown = choosingTime,0,-1 do
+        if #workspace.InGame:GetChildren() == 0 then break end
         _G.gameStatus.Value = "Round " .. round .. "; Pick a color (" .. countDown .. ")"
         task.wait(1)
     end
-    
+
+    if #workspace.InGame:GetChildren() == 0 then break end
+
     closeTween:Play()
     task.wait(1.2)
 

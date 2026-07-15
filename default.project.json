@@ -83,11 +83,6 @@
           "GameModel": { "$className": "Folder" }
         },
 
-        "Infection Tag": {
-          "$path": "src/server/Infection Tag.luau",
-          "GameModel": { "$className": "Folder" }
-        },
-
         "Crazy Colors": {
           "$path": "src/server/CrazyColors.luau",
           "GameModel": { "$className": "Folder" }
@@ -102,13 +97,31 @@
             "Tiles": { "$className": "Folder" }
           }
         },
-        "Boulder Run": {
-          "$path": "src/server/Boulder Run.luau",
+        "BombTag": {
+          "$path": "src/server/BombTag.luau",
           "GameModel": {
-            "$className": "Folder"
-          },
-          "Boulder": {
-            "$className": "Part"
+            "$className": "Folder",
+            "Spawn": { "$className": "Part" },
+            "Floor": { "$className": "Part" },
+            "Lava": { "$className": "Part" },
+            "BOMB": {
+              "$className": "Model",
+              "Bomb": { "$className": "Part" },
+              "Attachment": {
+                "$className": "Attachment",
+                "Explosion": { "$className": "ParticleEmitter" }
+              },
+              "Highlight": { "$className": "Highlight" },
+              "PointLight": { "$className": "PointLight" },
+              "Tick": { "$className": "Sound" },
+              "Boom": { "$className": "Sound" },
+              "The Bombshell Thread": {
+                "$className": "Model"
+              },
+              "Part": {
+                "$className": "Part"
+              }
+            }
           }
         },
 

@@ -159,6 +159,7 @@ function MiniGame.RunGame()
     for countDown = roundTime, 0, -1 do
 
         if winner ~= nil then break end
+        if #workspace.InGame:GetChildren() == 0 then break end
         _G.gameStatus.Value = countDown
         task.wait(1)
 

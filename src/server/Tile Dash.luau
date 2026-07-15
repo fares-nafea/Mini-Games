@@ -95,6 +95,7 @@ function TileDash.RunGame()
     coroutine.resume(gameThread)
 
     for countDown = gameTime, 0, -1 do
+        if #workspace.InGame:GetChildren() == 0 then break end
         _G.gameStatus.Value = countDown .. " seconds remain"
         task.wait(1)
     end
