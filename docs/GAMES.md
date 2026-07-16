@@ -2,6 +2,8 @@
 
 All game modules live in `src/server/` and are registered under `ServerStorage.MiniGames` via `default.project.json`. Each exports a `RunGame()` function.
 
+**Empty-game early exit:** In Lava Rising, Tile Dash, Crazy Colors, and Capture The Flag, the main countdown loop checks `#workspace.InGame:GetChildren() == 0` each tick and `break`s immediately if everyone has left/died, instead of waiting out the full timer. Spleef and BombTag get the same effect naturally since their loops already exit once `<= 1` player remains. When no one survives, `BasicEnding()` sets `_G.gameStatus.Value = "No winners"` instead of an empty "The Winners are: " string.
+
 ---
 
 ## 1. Lava Rising (`LavaRising.luau`)
@@ -54,37 +56,7 @@ All game modules live in `src/server/` and are registered under `ServerStorage.M
 
 ---
 
-## 3. Boulder Run (`Boulder Run.luau`)
-
-**Concept:** Race to the top while dodging randomly spawned rolling boulders. First player to reach the Win part wins.
-
-**Win condition:** First player to touch `GameModel.Win` part — custom logic, does **not** call `BasicEnding()` and does **not** add a win to `leaderstats`. (Known gap — add `gameWon.leaderstats.Wins.Value += 1` if desired.)
-
-**Boulder parameters:**
-| Constant | Value |
-|----------|-------|
-| `sizeMin` / `sizeMax` | 6–17 studs |
-| `spawnMin` / `spawnMax` | 0.5–1.5 s between spawns |
-| `lifetime` | 10 s (Debris service) |
-| `stunTime` | 2.5 s (PlatformStand on hit) |
-| `rav` | ±15 rad/s angular velocity |
-| `rlv` | ±60 stud/s linear velocity |
-
-**GameModel parts required:**
-- `BoulderSpawn` — Part defining the X/Z spawn zone (boulders spawn along its face)
-- `Spawn` — Player spawn point
-- `Win` — Part players must touch to win
-- `Boulders` — Folder where boulder clones are parented
-
-**Boulder template:** `script.Boulder` Part (defined in `default.project.json`)
-
-**Notes:**
-- `Debris:AddItem(boulder, 10)` auto-cleans boulders
-- Boulder hit stuns player (PlatformStand) and copies boulder's velocity
-
----
-
-## 4. Spleef (`Spleef.luau`)
+## 3. Spleef (`Spleef.luau`)
 
 **Concept:** Break tiles under opponents. Last player on a tile wins.
 
@@ -110,43 +82,36 @@ All game modules live in `src/server/` and are registered under `ServerStorage.M
 
 ---
 
-## 5. Infection Tag (`Infection Tag.luau`)
+## 4. Bomb Tag (`BombTag.luau`)
 
-**Concept:** One random tagger tries to infect all runners. Runners win if any survive 60 seconds; tagger wins if all are infected.
+**Concept:** One random player starts holding the bomb. Touching the bomb holder passes it to you. When the timer runs out, whoever is holding it dies. Repeats until one player is left.
 
-**Win condition:** Custom — checks `workspace.InGame` vs `taggedFolder`:
-- All runners infected → tagger and infected win (wins added manually)
-- Timer expires → remaining runners in `workspace.InGame` win
+**Win condition:** Loop while `#getAlivePlayers() > 1` (alive = in `workspace.InGame` with `Humanoid.Health > 0`) → `BasicEnding()`.
 
 **Key parameters:**
 | Constant | Value |
 |----------|-------|
-| `taggedSpeed` | 25 WalkSpeed |
-| `runnerSpeed` | 22 WalkSpeed |
-| Game timer | 60 s |
-| Tagger highlight | Green `RGB(155, 255, 48)` fill + `RGB(55, 255, 0)` outline |
+| `BOMB_TIME` | 10 s per holder before it explodes |
+| `PASS_COOLDOWN` | 0.3 s (prevents instant bounce-back after a pass) |
 
 **GameModel parts required:**
-- `Cage.PlayerSpawn` — All players spawn here initially
-- `Cage.TaggerSpawn` — Tagger is moved here
-- `Cage` — Destroyed when game starts (keeps tagger separated during prep)
-
-**Power interactions:**
-- `_G.ExtraSpeed = "DISABLED"` at game start; cleared to `nil` after game ends
-- Active ExtraSpeed power is destroyed from players at game start
-
-**Camera:**
-- `CameraMaxZoomDistance = 35` during game; restored to `StarterPlayer.CameraMaxZoomDistance` after
+- `Spawn` — Player spawn point
+- `Lava` — Kill zone (`.Touched → _G.KillFunction`)
+- `BOMB` — Model containing:
+  - `Bomb` — Part welded (`Motor6D`) to the holder's `RightHand`
+  - `Highlight` — Adorned to the current holder
+  - `PointLight`, `Tick` sound, `Boom` sound — blink/speed up as the timer runs down
+  - `Attachment.Explosion` — ParticleEmitter fired when the bomb goes off
 
 **Notes:**
-- Tagged players move to `workspace.Tagged` folder (a new Folder created per game, NOT `workspace.InGame`)
-- Tagged players spread the tag via their `HumanoidRootPart.Touched`
-- `Humanoid:SetAttribute("Tagged", true)` prevents double-tagging
-- Survivors use `BasicEnding()` is NOT called — wins are added manually
+- 3 s "Bomb Tag starting in..." prep countdown before the bomb is live
+- If fewer than 2 players are alive when the round would start, the game model is destroyed and `RunGame()` returns immediately without calling `BasicEnding()` (mirrors `MiniGame.MinPlayers = 2`)
+- Tick sound `PlaybackSpeed` and `PointLight` blink rate both ramp up as `timeLeft` approaches 0
+- On explosion the holder's `Humanoid.Health` is set to `0`; a new holder is picked from remaining alive players and the round continues
 
 ---
 
-## 6. Crazy Colors (`CrazyColors.luau`)
+## 5. Crazy Colors (`CrazyColors.luau`)
 
 **Concept:** Stand on safe-colored platforms. Every round a random color is eliminated (removed briefly). Players on the eliminated color fall into lava.
 
@@ -173,7 +138,7 @@ All game modules live in `src/server/` and are registered under `ServerStorage.M
 
 ---
 
-## 7. Capture The Flag (`Capture The Flag.luau`)
+## 6. Capture The Flag (`Capture The Flag.luau`)
 
 **Concept:** Team PvP. Steal the enemy flag and return it to your base to win. Uses swords.
 
@@ -214,7 +179,6 @@ All game modules live in `src/server/` and are registered under `ServerStorage.M
 - Does NOT use `BasicEnding()` — wins are awarded manually
 - Swords dictionary is `swords[player.UserId] = swordInstance` for reliable lookup across respawns
 - All connections (`deathConns`, `flagConns`) are explicitly disconnected at game end
-- Known bug: when `blueCarrier` restores WalkSpeed at game end, the code references `redCarrier` instead of `blueCarrier` (line ~207)
 
 ---
 
@@ -224,8 +188,7 @@ All game modules live in `src/server/` and are registered under `ServerStorage.M
 |------|--------------|-----------------|---------------|---------|-------|
 | Lava Rising | Survive timer | Yes | No | No | 28 s |
 | Tile Dash | Survive timer | Yes | No | No | 35 s |
-| Boulder Run | Reach top first | **No** | No | No | 60 s |
 | Spleef | Last standing | Yes | No | No | Until 1 left |
-| Infection Tag | Survive/infect | **No** (manual) | ExtraSpeed disabled | No | 60 s |
+| Bomb Tag | Last standing | Yes | No | No | 10 s per holder |
 | Crazy Colors | Survive rounds | Yes | No | No | 5 rounds |
 | Capture The Flag | Capture flag | **No** (manual) | No | **Yes** | 100 s |

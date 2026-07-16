@@ -2,7 +2,7 @@
 
 ## What This Project Is
 
-A **Roblox mini-games framework** built with [Rojo](https://rojo.space) (file-sync tool for Roblox Studio). Players join a lobby, vote on one of three randomly chosen mini-games, play it, and accumulate wins. The project has 7 mini-games, a shop (auras + powers), persistent data storage, and an AFK system.
+A **Roblox mini-games framework** built with [Rojo](https://rojo.space) (file-sync tool for Roblox Studio). Players join a lobby, vote on one of three randomly chosen mini-games, play it, and accumulate wins. The project has 6 mini-games (BombTag, Capture The Flag, CrazyColors, LavaRising, Spleef, Tile Dash), a shop (auras + powers), persistent data storage, and an AFK system.
 
 ## Toolchain & Workflow
 
@@ -33,7 +33,7 @@ src/
 │   ├── BasicEnding.luau            # Scans InGame folder for survivors → awards wins
 │   ├── Powers.luau                 # LowGravity + ExtraSpeed power definitions
 │   ├── SwordScript.server.lua      # Classic sword tool logic (CTF only)
-│   └── <GameName>.luau             # One module per mini-game (7 total)
+│   └── <GameName>.luau             # One module per mini-game (6 total: BombTag, Capture The Flag, CrazyColors, LavaRising, Spleef, Tile Dash)
 │
 ├── client/                  # StarterGui + StarterPlayer scripts
 │   ├── VotingClient.client.lua     # Voting UI, listens for VotingEvent
