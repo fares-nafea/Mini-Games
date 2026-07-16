@@ -97,7 +97,7 @@
             "Tiles": { "$className": "Folder" }
           }
         },
-        "BombTag": {
+        "Bomb Tag": {
           "$path": "src/server/BombTag.luau",
           "GameModel": {
             "$className": "Folder",
