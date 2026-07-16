@@ -5,9 +5,10 @@ local TweenService = game:GetService("TweenService")
 
 local gameTime = 35
 local startingDropTime = .5
-local dropTimeDecrease = .4
+local dropTimeDecrease = .05
+local minDropTime = .15
 local tileBlinkCount = 2
-local tilesToFall = 20
+local tilesToFall = 28
 local tileWarningColor = Color3.fromRGB(255, 73, 49)
 
 local tileTweenInfo = TweenInfo.new(
@@ -86,7 +87,7 @@ function TileDash.RunGame()
 
 
             task.wait(tileTweenInfo.Time * 2)
-            dropTime += dropTimeDecrease
+            dropTime = math.max(dropTime - dropTimeDecrease, minDropTime)
 
         end
 
